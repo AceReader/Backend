@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 /opt/grobid/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">CHEST PATHOLOGY DETECTION USING DEEP LEARNING WITH NON-MEDICAL TRAINING</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Yaniv</forename><surname>Bar</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">The Blavatnik School of Computer Science</orgName>
+								<orgName type="institution">Tel-Aviv University</orgName>
+								<address>
+									<postCode>69978</postCode>
+									<settlement>Tel Aviv</settlement>
+									<country key="IL">Israel</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Idit</forename><surname>Diamant</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Biomedical Engineering</orgName>
+								<orgName type="institution">Tel-Aviv University</orgName>
+								<address>
+									<postCode>69978</postCode>
+									<settlement>Tel Aviv</settlement>
+									<country key="IL">Israel</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Lior</forename><surname>Wolf</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">The Blavatnik School of Computer Science</orgName>
+								<orgName type="institution">Tel-Aviv University</orgName>
+								<address>
+									<postCode>69978</postCode>
+									<settlement>Tel Aviv</settlement>
+									<country key="IL">Israel</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Sivan</forename><surname>Lieberman</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Diagnostic Imaging Department</orgName>
+								<orgName type="institution" key="instit1">Sheba Medical Center</orgName>
+								<orgName type="institution" key="instit2">Tel Hashomer</orgName>
+								<address>
+									<country key="IL">Israel</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Eli</forename><surname>Konen</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Diagnostic Imaging Department</orgName>
+								<orgName type="institution" key="instit1">Sheba Medical Center</orgName>
+								<orgName type="institution" key="instit2">Tel Hashomer</orgName>
+								<address>
+									<country key="IL">Israel</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Hayit</forename><surname>Greenspan</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Biomedical Engineering</orgName>
+								<orgName type="institution">Tel-Aviv University</orgName>
+								<address>
+									<postCode>69978</postCode>
+									<settlement>Tel Aviv</settlement>
+									<country key="IL">Israel</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">CHEST PATHOLOGY DETECTION USING DEEP LEARNING WITH NON-MEDICAL TRAINING</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.6.1" ident="GROBID" when="2021-03-16T13:44+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Chest Radiography</term>
+					<term>Computer-Aided Diagnosis Disease Categorization</term>
+					<term>Deep Learning</term>
+					<term>Deep Networks</term>
+					<term>CNN</term>
+				</keywords>
+			</textClass>
+			<abstract>
+				<p>In this work, we examine the strength of deep learning approaches for pathology detection in chest radiographs. Convolutional neural networks (CNN) deep architecture classification approaches have gained popularity due to their ability to learn mid and high level image representations. We explore the ability of CNN learned from a non-medical dataset to identify different types of pathologies in chest x-rays. We tested our algorithm on a 433 image dataset. The best performance was achieved using CNN and GIST features. We obtained an area under curve (AUC) of 0.87-0.94 for the different pathologies. The results demonstrate the feasibility of detecting pathology in chest x-rays using deep learning approaches based on non-medical learning. This is a first-of-its-kind experiment that shows that Deep learning with ImageNet, a large scale non-medical image database may be a good substitute to domain specific representations, which are yet to be available, for general medical image recognition tasks.</p>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">INTRODUCTION</head><p>Chest radiographs are the most common examination in radiology. They are essential for the management of various diseases associated with high mortality and display a wide range of potential information, many of which is subtle. Most of the research in computer-aided detection and diagnosis in chest radiography has focused on lung nodule detection. Although the target of most research attention, lung nodules are a relatively rare finding in the lungs. The most common findings in chest X-rays include lung infiltrates, catheters and abnormalities of the size or contour of the heart <ref type="bibr" target="#b0">[1]</ref>. <ref type="figure" target="#fig_0">Fig. 1</ref> shows examples of healthy and pathological chest X-rays. Distinguishing the various chest pathologies is a difficult task even to the human observer. Therefore, there is an interest in developing computer system diagnosis to assist radiologists in reading chest images.</p><p>Initial studies on chest pathology detection in radiographs can be found in the literature <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b2">3,</ref><ref type="bibr" target="#b3">4]</ref>. In <ref type="bibr" target="#b1">[2]</ref> the healthy versus pathology detection in chest radiography was explored using Local Binary Patterns (LBP) <ref type="bibr" target="#b4">[5]</ref>. Avni et al. <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b3">4]</ref> used the Bag-of-Visual-Words (BoVW) model <ref type="bibr" target="#b5">[6]</ref> to discriminate between healthy and four pathological cases.</p><p>Deep neural networks have recently gained considerable interest due to the development of new variants of CNNs and the advent of efficient parallel solvers optimized for modern GPUs. Deep learning refers to machine learning models such as Convolutional Neural Networks (CNNs) that represent mid-level and high-level abstractions obtained from raw data (e.g. images) <ref type="bibr" target="#b6">[7]</ref>. Recent results indicate that the generic descriptors extracted from CNNs are extremely effective in object recognition, and are currently the leading technology <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b8">9]</ref>. Deep learning methods are most effective when applied on large training sets. In the medical field such large datasets are usually not available. Initial studies can be found in the medical field that uses deep architecture methods <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b10">11]</ref>. However, we are not aware of any works that use generic, non-medical, training sets in order to address a medical imaging task. Moreover, we are not aware of any deep architecture methods for the specific task of pathology detection in chest radiographs.</p><p>In our work, we utilize the strength of deep learning approaches in a wide range of chest-related diseases. We also explore categorization of healthy versus pathology which is an important screening task. We empirically explore the use of CNNs for these tasks with a particular focus on pre-trained CNN that is learned from a large scale real-life and non-medical image database. We later show that categorization rates can be slightly improved by combining features extracted from CNN and common low-level visual features that are optimal for the task of object categorization.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">METHODS</head><p>CNNs constitute a feed-forward family of deep networks, where intermediate layers receive as input the features generated by the former layer, and pass their outputs to the next layer. The strength of a deep network is in learning hierarchical layers of concept representation, corresponding to different levels of abstraction. For visual data, the low levels of abstraction might describe the different orientated edges in the image; middle levels might describe parts of an object while high layers refer to larger object parts and even the object itself. In this work, we tested the deep learning network capabilities in chest pathology detection</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1.">Pre-trained CNN model using ImageNet</head><p>We focus on the Decaf pre-trained CNN model <ref type="bibr" target="#b11">[12]</ref>, an adaptation of a CNN which closely follows the CNN which was constructed by Krizhevsky et al. <ref type="bibr" target="#b12">[13]</ref>, with the exception of small differences in the input data and the cancelation of the split of the network into two pathways. The CNNs in <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b12">13]</ref> were learned over a subset of images from ImageNet <ref type="bibr" target="#b13">[14]</ref>, a comprehensive real-life large scale image database (&gt;20M) that is arranged according to concepts/categories (&gt;10K). Specifically, <ref type="bibr" target="#b11">[12]</ref> learned a CNN on more than one million images that are categorized into 1000 categories, which is illustrated in <ref type="figure" target="#fig_1">Figure 2</ref>. Using the notation of <ref type="bibr" target="#b11">[12]</ref> to denote the activations of the nth hidden layer of the obtained network as Decafn, the 5th layer (Decaf5) and 6th layer (Decaf6) and 7th layer (Decaf7) features were extracted and defined as descriptors. Decaf5 denotes the last convolutional layer and is the first set of activations that has been fully propagated through the convolutional layers of the network and Decaf6 denotes the first fully-connected layer. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2.">Selecting and Combining feature sets</head><p>We tested several common descriptors that are known in the literature, including GIST <ref type="bibr" target="#b14">[15]</ref> and Bag-of-Visual-Words (BoVW). The GIST descriptor <ref type="bibr" target="#b14">[15]</ref> is derived by resizing an image to 128 x 128 and iterating over different scales (4 scales in our case) where for each scale the image is divided into 8x8 cells. For each cell, orientation (every 45 degrees), color and intensity histograms are extracted, and the descriptor is a concatenation of all histograms, for all scales and cells. BoVW is a state-of-the-art method that has been previously tested for this specific task <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b3">4]</ref>. The BoVW <ref type="bibr" target="#b5">[6]</ref> image representation is adapted from the bag-of-words (BoW) representation of text documents. Therefore, to represent an image using BoVW model, it must be treated as a document, which means that the image is treated as a distribution of visual elements. We thus need to find these visual elements and discretize their space in order to create the visual word dictionary. Once we generated the visual word dictionary, an image can be represented as a histogram of visual word occurrences based on the collection of its local descriptors. We implemented the visual words model <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b3">4]</ref> as follows: (1) extracting patches from each training image, (2) Applying Principal Component Analysis (PCA) for dimensionality reduction to reduce noise level and computational complexity, (3) adding the patch center coordinates to the feature vector. This introduces spatial information into the image representation, without the need to explicitly model the spatial dependency between patches, (4) clustering of all patches using K-means into representative visual words generating a dictionary. K-means is a common clustering method which clusters the input feature vectors into K groups where their centers used as the visual words which build the dictionary. A given (training or testing) image can now be represented by a unique distribution over the generated dictionary of words. Empirically, we found that using 7 PCA components of variance-normalized raw patches and using a dictionary size of 1000 words results in the best classification performance.</p><p>All features used in our work were normalized: each feature across all images has its mean subtracted, and is divided by its standard deviation. Following normalization, we applied fusion of different feature groups. Empirically we claim that fusing CNN intermediate layers features with GIST features captures the salient information that allows a more accurate categorization of our problem. We implemented a fusion approach of the different features by averaging the class probabilities obtained for each feature group. The algorithm flowchart is described in <ref type="figure" target="#fig_2">Figure 3</ref>. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">EXPERIMENTS AND RESULTS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.">Data</head><p>Our dataset consists of 443 frontal chest x-ray images (DICOM format). The images were acquired from the Diagnostic Imaging Department of Sheba Medical Center (Tel-Hashomer, Israel). Two radiologists interpreted the X-rays, and this served as the reference gold standard. The radiologists examined all of the images independently. They then discussed and reached a consensus regarding the label of every image. For each image and pathology type, a positive or negative label was assigned. The images depict 3 chest pathology conditions: Right Pleural Effusion (44 images), Cardiomegaly (99 images) and Abnormal Mediastinum (110 images). Overall, the dataset contains 219 images with at least one pathology condition. The digitized images were cropped and centered.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.">Experimental Results</head><p>We started with a binary categorization task, per pathology. Classification was performed using a Support Vector Machine (SVM) classifier with leave-one-out-cross-validation method. For each binary categorization task, cases diagnosed with the examined pathology were labeled as positive cases, while cases that weren't diagnosed with this pathology were labeled as negative cases. We investigated the different linear and nonlinear kernels (linear, polynomial and RBF) using standard grid-search technique, and empirically selected the efficient non-linear intersection kernel. Three accuracy measures were examined: sensitivity, specificity and the area under the ROC curve (AUC). Sensitivity and Specificity are derived based on the optimal cut point on the ROC -the point on the curve closest to (0,1).</p><p>Tables 1-3 present the experimental results. We report Decaf5 and Decaf6 baseline descriptors (Decaf7 gave less significant results). We note the boost in performance following the introduction of deep architecture descriptors. For all cases, the deep architecture descriptors outperform the GIST descriptor. Another improvement was gained by applying late fusion on the baseline descriptors: Decaf5, Decaf6 and GIST. In almost all cases the fused descriptor outperforms the deep architecture singlelayered descriptors. In several of the cases a clear improvement over the BoVW descriptor is shown. <ref type="figure" target="#fig_3">Figure 4</ref> shows comparative ROC curve analysis performed on our dataset using a leave-one-out-cross-validation method. It can be seen that our fused method matches or outperforms all other tested methods.  <ref type="table">Table 3</ref>. Specificity accuracy metric.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">CONCLUSIONS</head><p>In conclusion, in this work we present a system for the medical application of chest pathology detection in radiograph images which uses CNN that is learned from a non-medical dataset (ImageNet). Unlike previous work on using pre-trained CNNs as a feature extraction method <ref type="bibr" target="#b7">[8]</ref>, in our case Decaf5 baseline descriptor is the leading representation. This representation alone is an effective off-the-shelf descriptor for chest x-ray retrieval tasks. We have demonstrated that this result can be improved by fusing the baseline descriptors of Decaf5, Decaf6 and GIST, assuming that the combination captures information that eludes each one of the descriptors alone. Future work entails further tuning of the CNN with actual x-ray data. We believe such tuning may augment the CNN performance even further. Our results demonstrate the feasibility of detecting pathology in chest x-ray using deep learning approaches based on non-medical learning. This is a general approach that is also applicable to other medical classification tasks.</p><p>Right Pleural Effusion Detection.</p><p>Abnormal Mediastinum Detection.</p><p>Cardiomegaly Detection, Healthy vs. Pathology Detection. </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1 .</head><label>1</label><figDesc>Chest x-rays categories examples: (a)-(c) healthy; (d)-(f) enlarged heart (cardiomegaly); (g)-(i) enlarged mediastinum; (j)-(l) left or right effusion; (m) multiple pathologies: enlarged heart and mediastinum, left and right effusion.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 2 .</head><label>2</label><figDesc>An illustration of the architecture of the CNN used by<ref type="bibr" target="#b11">[12]</ref>.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 3 .</head><label>3</label><figDesc>Algorithm flowchart.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 4 .</head><label>4</label><figDesc>ROCs of different examined pathologies.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 .Table 2 .</head><label>12</label><figDesc>AUC accuracy metric. Sensitivity accuracy metric.</figDesc><table><row><cell></cell><cell></cell><cell></cell><cell cols="2">Deep Learning</cell><cell>Late Fusion</cell></row><row><cell>Descriptor</cell><cell>GIST</cell><cell>BoVW</cell><cell>L5</cell><cell>L6</cell><cell>GIST+L5+L6</cell></row><row><cell>Right Pleural</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Effusion</cell><cell>0.87</cell><cell>0.89</cell><cell>0.94</cell><cell>0.90</cell><cell>0.92</cell></row><row><cell>Cardiomegaly</cell><cell>0.92</cell><cell>0.94</cell><cell>0.93</cell><cell>0.91</cell><cell>0.94</cell></row><row><cell>Mediastinum</cell><cell>0.83</cell><cell>0.86</cell><cell>0.87</cell><cell>0.87</cell><cell>0.88</cell></row><row><cell>Healthy vs</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Pathology</cell><cell>0.84</cell><cell>0.88</cell><cell>0.86</cell><cell>0.86</cell><cell>0.87</cell></row><row><cell></cell><cell></cell><cell></cell><cell cols="2">Deep Learning</cell><cell>Late Fusion</cell></row><row><cell>Descriptor</cell><cell>GIST</cell><cell>BoVW</cell><cell>L5</cell><cell>L6</cell><cell>GIST+L5+L6</cell></row><row><cell>Right Pleural</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Effusion</cell><cell>0.82</cell><cell>0.84</cell><cell>0.89</cell><cell>0.89</cell><cell>0.86</cell></row><row><cell>Cardiomegaly</cell><cell>0.84</cell><cell>0.89</cell><cell>0.85</cell><cell>0.87</cell><cell>0.89</cell></row><row><cell>Mediastinum</cell><cell>0.79</cell><cell>0.80</cell><cell>0.81</cell><cell>0.74</cell><cell>0.80</cell></row><row><cell>Healthy vs</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Pathology</cell><cell>0.83</cell><cell>0.80</cell><cell>0.80</cell><cell>0.86</cell><cell>0.84</cell></row><row><cell></cell><cell></cell><cell></cell><cell cols="2">Deep Learning</cell><cell>Late Fusion</cell></row><row><cell>Descriptor</cell><cell>GIST</cell><cell>BoVW</cell><cell>L5</cell><cell>L6</cell><cell>GIST+L5+L6</cell></row><row><cell>Right Pleural</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Effusion</cell><cell>0.80</cell><cell>0.85</cell><cell>0.87</cell><cell>0.80</cell><cell>0.83</cell></row><row><cell>Cardiomegaly</cell><cell>0.82</cell><cell>0.87</cell><cell>0.89</cell><cell>0.82</cell><cell>0.86</cell></row><row><cell>Mediastinum</cell><cell>0.78</cell><cell>0.80</cell><cell>0.82</cell><cell>0.84</cell><cell>0.85</cell></row><row><cell>Healthy vs</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Pathology</cell><cell>0.72</cell><cell>0.79</cell><cell>0.79</cell><cell>0.72</cell><cell>0.78</cell></row></table><note></note></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot">Authorized licensed use limited to: National Tsing Hua Univ.. Downloaded on August 15,2020 at 13:27:52 UTC from IEEE Xplore. Restrictions apply.</note>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Computer-aided diagnosis in chest radiography: Beyond nodules</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">B</forename><surname>Van Ginneken</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><surname>Hogeweg</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Prokop</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">European Journal of Radiology</title>
+		<imprint>
+			<biblScope unit="volume">72</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="226" to="230" />
+			<date type="published" when="2009" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Detection of Normality / Pathology on Chest Radiographs using LBP</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><forename type="middle">M</forename><surname>Carrillo-De-Gea</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">G</forename><surname>García-Mateos</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Bioinformatics</title>
+		<imprint>
+			<date type="published" when="2010" />
+			<biblScope unit="page" from="167" to="172" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">X-ray categorization and retrieval on the organ and pathology level, using patch-based visual words</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">U</forename><surname>Avni</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">H</forename><surname>Greenspan</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">E</forename><surname>Konen</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Sharon</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Goldberger</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Medical Imaging</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="733" to="746" />
+			<date type="published" when="2011" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">X-ray categorization and spatial localization of chest pathologies</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">U</forename><surname>Avni</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">H</forename><surname>Greenspan</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Goldberger</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Medical Image Computing and Computer-Assisted Intervention-MICCAI</title>
+		<imprint>
+			<biblScope unit="page" from="199" to="206" />
+			<date type="published" when="2011" />
+			<publisher>Springer</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">A comparative study of texture measures with classification based on featured distributions</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Ojala</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Pietikäinen</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><surname>Harwood</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pattern recognition</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="51" to="59" />
+			<date type="published" when="1996" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Visual categorization with bags of keypoints</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">G</forename><surname>Csurka</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">C</forename><surname>Dance</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Willamowski</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">C</forename><surname>Bray</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Workshop on statistical learning in computer vision, ECCV</title>
+		<imprint>
+			<date type="published" when="2004" />
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="1" to="2" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Convolutional networks and applications in vision</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Y</forename><surname>Lecun</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Kavukcuoglu</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">C</forename><surname>Farabet</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of IEEE International Symposium on Circuits and Systems (ISCAS)</title>
+		<meeting>IEEE International Symposium on Circuits and Systems (ISCAS)</meeting>
+		<imprint>
+			<date type="published" when="2010" />
+			<biblScope unit="page" from="253" to="256" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">CNN Features off-theshelf: an Astounding Baseline for Recognition</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><forename type="middle">S</forename><surname>Razavian</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">H</forename><surname>Azizpour</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Sullivan</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Carlsson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)</title>
+		<imprint>
+			<date type="published" when="2014" />
+			<biblScope unit="page" from="512" to="519" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Learning and transferring mid-level image representations using convolutional neural networks</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Oquab</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><surname>Bottou</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">I</forename><surname>Laptev</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Sivic</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</title>
+		<imprint>
+			<date type="published" when="2014" />
+			<biblScope unit="page" from="1717" to="1724" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Deep feature learning for knee cartilage segmentation using a triplanar convolutional neural network</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Prasoon</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Petersen</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">C</forename><surname>Igel</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Lauze</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">E</forename><surname>Dam</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Nielsen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Medical Image Computing and Computer-Assisted Intervention-MICCAI</title>
+		<imprint>
+			<biblScope unit="page" from="246" to="253" />
+			<date type="published" when="2013" />
+			<publisher>Springer</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Mitosis detection in breast cancer histology images with deep neural networks</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><forename type="middle">C</forename><surname>Cireşan</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Giusti</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><forename type="middle">M</forename><surname>Gambardella</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Schmidhuber</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Medical Image Computing and Computer-Assisted Intervention-MICCAI</title>
+		<imprint>
+			<biblScope unit="page" from="411" to="418" />
+			<date type="published" when="2013" />
+			<publisher>Springer</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Decaf: A deep convolutional activation feature for generic visual recognition</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Donahue</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Y</forename><surname>Jia</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">O</forename><surname>Vinyals</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Hoffman</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">N</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">E</forename><surname>Tzeng</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Darrell</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1310.1531</idno>
+		<imprint>
+			<date type="published" when="2013" />
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Imagenet classification with deep convolutional neural networks</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Krizhevsky</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">I</forename><surname>Sutskever</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">G</forename><forename type="middle">E</forename><surname>Hinton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in neural information processing systems</title>
+		<imprint>
+			<date type="published" when="2012" />
+			<biblScope unit="page" from="1097" to="1105" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Imagenet: A largescale hierarchical image database</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Deng</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">W</forename><surname>Dong</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">R</forename><surname>Socher</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><forename type="middle">J</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><surname>Fei-Fei</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</title>
+		<imprint>
+			<date type="published" when="2009" />
+			<biblScope unit="page" from="248" to="255" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Modeling the shape of the scene: A holistic representation of the spatial envelope</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Oliva</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Torralba</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International journal of computer vision</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="145" to="175" />
+			<date type="published" when="2001" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>
