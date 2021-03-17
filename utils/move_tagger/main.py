@@ -144,21 +144,57 @@ dump(crf, 'CRF.joblib')
 
 # Testing
 # SVM_Testing
-a = ['The importance of identifying rhetorical categories in texts has been widely acknowledged in the literature, since information regarding text organization or structure can be applied in a variety of scenarios, including genre-specific writing support and evaluation, both manually and automat- ically.', 'In this paper we present a Long Short-Term Memory (LSTM) encoder-decoder classifier for scientific abstracts.', 'As a large corpus of annotated abstracts was required to train our classifier, we built a corpus using abstracts extracted from PUBMED/MEDLINE.', 'Using the proposed classifier we achieved approximately 3% improvement in per-abstract ac- curacy over the baselines and 1% improvement for both per- sentence accuracy and f1-score.']
+a = ['The importance of identifying rhetorical categories in texts has been \
+     widely acknowledged in the literature, since information regarding text \
+     organization or structure can be applied in a variety of scenarios, \
+     including genre-specific writing support and evaluation, both manually \
+     and automatically.',
+     'In this paper we present a Long Short-Term Memory (LSTM) encoder-decoder \
+     classifier for scientific abstracts.',
+     'As a large corpus of annotated abstracts was required to train our \
+     classifier, we built a corpus using abstracts extracted from \
+     PUBMED/MEDLINE.',
+     'Using the proposed classifier we achieved approximately 3% improvement \
+     in per-abstract accuracy over the baselines and 1% improvement for both \
+     per-sentence accuracy and f1-score.']
 sent_feature = preprocess_sent(a, selected_bigrams, selected_unigrams)
 sent_pred = clf.predict(sent_feature)
 sent_pred = postprocess(sent_pred)
 print("SVM predict : ", sent_pred)
 
 # NB_Testing
-a = ['The importance of identifying rhetorical categories in texts has been widely acknowledged in the literature, since information regarding text organization or structure can be applied in a variety of scenarios, including genre-specific writing support and evaluation, both manually and automat- ically.', 'In this paper we present a Long Short-Term Memory (LSTM) encoder-decoder classifier for scientific abstracts.', 'As a large corpus of annotated abstracts was required to train our classifier, we built a corpus using abstracts extracted from PUBMED/MEDLINE.', 'Using the proposed classifier we achieved approximately 3% improvement in per-abstract ac- curacy over the baselines and 1% improvement for both per- sentence accuracy and f1-score.']
+a = ['The importance of identifying rhetorical categories in texts has been \
+     widely acknowledged in the literature, since information regarding text \
+     organization or structure can be applied in a variety of scenarios, \
+     including genre-specific writing support and evaluation, both manually \
+     and automatically.',
+     'In this paper we present a Long Short-Term Memory (LSTM) encoder-decoder \
+     classifier for scientific abstracts.',
+     'As a large corpus of annotated abstracts was required to train our \
+     classifier, we built a corpus using abstracts extracted from \
+     PUBMED/MEDLINE.',
+     'Using the proposed classifier we achieved approximately 3% improvement \
+     in per-abstract accuracy over the baselines and 1% improvement for both \
+     per-sentence accuracy and f1-score.']
 sent_feature = preprocess_sent(a, selected_bigrams, selected_unigrams)
 nb_sent_pred1 = mlt.predict(sent_feature)
 nb_sent_pred = postprocess(nb_sent_pred1)
 print("NB predict : ", nb_sent_pred)
 
 # CRF_Testing
-a = ['The importance of identifying rhetorical categories in texts has been widely acknowledged in the literature, since information regarding text organization or structure can be applied in a variety of scenarios, including genre-specific writing support and evaluation, both manually and automat- ically.', 'In this paper we present a Long Short-Term Memory (LSTM) encoder-decoder classifier for scientific abstracts.', 'As a large corpus of annotated abstracts was required to train our classifier, we built a corpus using abstracts extracted from PUBMED/MEDLINE.', 'Using the proposed classifier we achieved approximately 3% improvement in per-abstract ac- curacy over the baselines and 1% improvement for both per- sentence accuracy and f1-score.']
+a = ['The importance of identifying rhetorical categories in texts has been \
+     widely acknowledged in the literature, since information regarding text \
+     organization or structure can be applied in a variety of scenarios, \
+     including genre-specific writing support and evaluation, both manually \
+     and automatically.',
+     'In this paper we present a Long Short-Term Memory (LSTM) encoder-decoder \
+     classifier for scientific abstracts.',
+     'As a large corpus of annotated abstracts was required to train our \
+     classifier, we built a corpus using abstracts extracted from \
+     PUBMED/MEDLINE.',
+     'Using the proposed classifier we achieved approximately 3% improvement \
+     in per-abstract accuracy over the baselines and 1% improvement for both \
+     per-sentence accuracy and f1-score.']
 sent_feature = preprocess_sent(a, selected_bigrams, selected_unigrams)
 
 # sent_feature_crf
