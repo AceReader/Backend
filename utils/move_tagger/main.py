@@ -32,7 +32,8 @@ print("data size = ", dataSize)
 data = readData_PUBMED(data_size=dataSize)
 
 # Feature selection
-feature_bigrams, feature_unigrams, labels, selected_bigrams, selected_unigrams = content_features(data, top_k=dataSize)
+feature_bigrams, feature_unigrams, labels, selected_bigrams, \
+    selected_unigrams = content_features(data, top_k=dataSize)
 feature_location = location_feature(data)
 
 # Save selected features
